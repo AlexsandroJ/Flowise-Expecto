@@ -1,0 +1,31 @@
+Valide se um número inteiro x é par e estritamente positivo (> 0).
+Exemplos do usuário: x=4 (true), x=3 (false), x=-2 (false).
+
+## Especificação Formal Completa
+
+### 1. Especificação de Alto Nível (Spec)
+def Spec(x: int) { IsEven(x) ∧ IsPositive(x) }
+
+### 2. Subcomponentes Formalizados (DSL)
+def IsEven(x: int): x % 2 == 0
+def IsPositive(x: int): x > 0
+def Spec(x: int): And(IsEven(x), IsPositive(x))
+
+
+
+
+
+Valide se três lados (a, b, c) formam um triângulo válido.
+Regras: todos os lados devem ser estritamente positivos, e a soma de quaisquer dois lados deve ser estritamente maior que o terceiro.
+Exemplos do usuário: (a=3, b=4, c=5) -> true. (a=1, b=1, c=10) -> false. (a=0, b=5, c=5) -> false.
+
+
+## Especificação Formal Completa
+
+### 1. Especificação de Alto Nível (Spec)
+def Spec(a: int, b: int, c: int) { ArePositive(a, b, c) ∧ TriangleInequality(a, b, c) }
+
+### 2. Subcomponentes Formalizados (DSL)
+def ArePositive(a: int, b: int, c: int): And(a > 0, b > 0, c > 0)
+def TriangleInequality(a: int, b: int, c: int): And(a + b > c, a + c > b, b + c > a)
+def Spec(a: int, b: int, c: int): And(ArePositive(a, b, c), TriangleInequality(a, b, c))
