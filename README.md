@@ -29,12 +29,18 @@ Este repositório reúne duas partes:
 ### 1.1 Subir o container
 
 ```bash
+# 1. Parar e remover o container atual
+docker rm -f flowise
+
+# 2. Rodar com a variável correta
 docker run -d \
   --name flowise \
   -p 3000:3000 \
+  -e HTTP_SECURITY_CHECK=false \
   -v flowise_data:/home/node/.flowise \
-  flowiseai/flowise:3.0.13
+  flowiseai/flowise:3.1.3
 ```
+
 
 Depois de iniciar, acesse: <http://localhost:3000>
 
