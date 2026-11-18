@@ -1,48 +1,49 @@
 model_list:
+  
   # ==========================================
-  # GRUPO 1: groq/openai/gpt-oss-20b (3 chaves)
+  # GRUPO 1: groq/openai/gpt-oss-120b (3 chaves)
   # ==========================================
-  - model_name: groq/openai/gpt-oss-20b
+  - model_name: groq/openai/gpt-oss-120b
     litellm_params:
-      model: groq/openai/gpt-oss-20b
+      model: groq/openai/gpt-oss-120b
       api_key: os.environ/GROQ_API_KEY_AJS6
       rpm: 30
       tpm: 8000
 
-  - model_name: groq/openai/gpt-oss-20b
+  - model_name: groq/openai/gpt-oss-120b
     litellm_params:
-      model: groq/openai/gpt-oss-20b
+      model: groq/openai/gpt-oss-120b
       api_key: os.environ/GROQ_API_KEY_UFPE
       rpm: 30
       tpm: 8000
 
-  - model_name: groq/openai/gpt-oss-20b
+  - model_name: groq/openai/gpt-oss-120b
     litellm_params:
-      model: groq/openai/gpt-oss-20b
+      model: groq/openai/gpt-oss-120b
       api_key: os.environ/GROQ_API_KEY_BBOY
       rpm: 30
       tpm: 8000
 
+# ==========================================
+  # GRUPO 2: groq/openai/gpt-oss-20b (3 chaves)
   # ==========================================
-  # GRUPO 2: groq/openai/gpt-oss-120b (3 chaves)
-  # ==========================================
-  - model_name: groq/openai/gpt-oss-120b
+  - model_name: groq/openai/gpt-oss-20b
     litellm_params:
-      model: groq/openai/gpt-oss-120b
+      model: groq/openai/gpt-oss-20b
       api_key: os.environ/GROQ_API_KEY_AJS6
       rpm: 30
       tpm: 8000
 
-  - model_name: groq/openai/gpt-oss-120b
+  - model_name: groq/openai/gpt-oss-20b
     litellm_params:
-      model: groq/openai/gpt-oss-120b
+      model: groq/openai/gpt-oss-20b
       api_key: os.environ/GROQ_API_KEY_UFPE
       rpm: 30
       tpm: 8000
 
-  - model_name: groq/openai/gpt-oss-120b
+  - model_name: groq/openai/gpt-oss-20b
     litellm_params:
-      model: groq/openai/gpt-oss-120b
+      model: groq/openai/gpt-oss-20b
       api_key: os.environ/GROQ_API_KEY_BBOY
       rpm: 30
       tpm: 8000
@@ -71,9 +72,12 @@ model_list:
       rpm: 30
       tpm: 8000
 
+litellm_settings:
+  drop_params: true
+
 router_settings:
   routing_strategy: simple-shuffle
   num_retries: 3 # Tenta as 3 chaves dentro do mesmo grupo antes de pular de modelo
   cooldown_time: 300
   fallbacks:
-    - groq/openai/gpt-oss-20b: ["groq/openai/gpt-oss-120b", "groq/qwen/qwen3.8-27b"]
+    - groq/openai/gpt-oss-120b: [ "groq/qwen/qwen3.8-27b", "groq/openai/gpt-oss-20b" ]
