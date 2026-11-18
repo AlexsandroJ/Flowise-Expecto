@@ -1,0 +1,26 @@
+model_list:
+  # 1ª Opção (Principal - ex: Groq gratuito, muito rápido)
+  - model_name: modelo-principal
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+
+  # 2ª Opção (Reserva 1 - ex: Google Gemini gratuito)
+  - model_name: reserva-gemini
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # 3ª Opção (Reserva 2 - ex: OpenRouter gratuito)
+  - model_name: reserva-openrouter
+    litellm_params:
+      model: openrouter/meta-llama/llama-3.3-70b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+
+router_settings:
+  num_retries: 2
+  cooldown_time: 60 # Deixa o modelo bloqueado "descansando" por 60s após estourar o limite
+  fallbacks:
+    - modelo-principal: ["reserva-gemini", "reserva-openrouter"]
+  context_window_fallbacks:
+    - modelo-principal: ["reserva-gemini"] # Troca se o texto for grande demais para o 1º modelo
